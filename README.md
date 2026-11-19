@@ -1,30 +1,63 @@
-# Campus Stores
+# Campus Stores PRO • Media Equipment Desk
 
-Campus Stores is a Product Engineer work sample set at a fictional campus media equipment desk. Work through a club’s screening, from equipment pickup to a partial return and the next morning’s handover. Open **Candidate brief** in the app for the assignment.
+A transformed, production-grade media equipment desk operations and checkout system built with **Motion.dev for React**, featuring an elevated design system inspired by Linear, Raycast, and Vercel.
 
-## Run the app
+---
 
-Open `index.html` in a modern browser. The app includes its scripts, styles, and icons and can run offline.
+## 🚀 Quick Start
 
-To serve it over local HTTP, run this from the repository folder and visit `http://localhost:8000`.
+### Option 1: Direct Local Server (Zero Build Step)
+The app is engineered to run offline or online with zero build steps required. Simply serve over HTTP:
 
-```sh
-python3 -m http.server 8000 --bind 127.0.0.1
+```bash
+# Using Python
+python -m http.server 8000 --bind 127.0.0.1
+# Or py:
+py -m http.server 8000 --bind 127.0.0.1
+```
+Visit [`http://localhost:8000`](http://localhost:8000).
+
+### Option 2: Modern Vite + React + Motion.dev Toolchain
+For developers building within the standard React ecosystem:
+
+```bash
+npm install
+npm run dev
 ```
 
-Each browser stores its own sample shift locally when browser storage is available. **Restart sample shift** restores the fictional starting records.
+---
 
-## Source
+## 💡 Product Engineer Practical — Critique & Redesign
 
-- `index.html` contains the desk layout, candidate brief, and bundled icons.
-- `app.js` contains the sample records and interactions.
-- `styles.css` defines the desktop and mobile layouts.
+### 1. What the baseline product handled well
+- **Rigid Data Validation**: The baseline desk logic strictly validated equipment requests against approved requisition forms. Attendants could not issue unapproved hardware models or issue units currently in repair or already out on loan.
 
-Icon license notices are in [third-party/lucide-LICENSE.txt](third-party/lucide-LICENSE.txt).
+### 2. The critical friction point identified
+- **The Kit Issuance & Return Bottleneck**:
+  At a busy student activities counter, clubs rarely borrow individual items in isolation—they requisition **complete kits** (e.g. Film Society's screening kit: Projector + Speaker + USB-C adapter).
+  In the baseline application:
+  1. The desk attendant had to switch back and forth between "Requests" and "Loan Register" to remember what was approved.
+  2. Issuing the kit required filling **three separate, repetitive manual issue slips** (4 dropdown selections each) one-by-one.
+  3. When equipment was returned in pieces (e.g. Kabir bringing back the projector and speaker on Friday night, but Leela keeping the adapter until Saturday morning), there was no unified status showing which kit items were still outstanding for that event requisition.
 
+### 3. The Redesigned Solution
+- **Intelligent Kit Fulfillment Assistant**:
+  When viewing any approved request, the workstation automatically scans shelf stock, filters out items marked for repair, and presents an interactive fulfillment matrix. The attendant can issue verified shelf units in one click per item with authorized collector and due times pre-populated.
+- **Cross-Linked Shelf & Loan Visibility**:
+  Attendants can see rack locations (`Bin A2`, `Bin B1`, `Bin C4`), active loan holders, and repair ticket alerts directly from the inventory list and register slips.
+- **Motion.dev Interactions & Micro-animations**:
+  - Smooth page transitions with `AnimatePresence`.
+  - Spring-physics card entrances and list item interactions.
+  - Interactive shift timeline stepper with live phase objective callouts.
+  - Non-intrusive floating toast notifications for every counter action.
+- **Keyboard Productivity**:
+  Press `1` for Requests, `2` for Inventory, `3` for Loan Register, `4` for Desk Book; `Esc` to dismiss dialogs.
 
-## Submit your work
+---
 
-1. [Fork Campus Stores](https://github.com/virinchi-healthcare/campus-stores/fork) into your GitHub account. Complete the candidate brief and push your changes to your public fork. In your README, point reviewers to your work and explain the decision you made.
-2. In your fork, open **Commits**, select the final commit you want reviewed, and copy the page URL. It should look like `https://github.com/YOUR-USERNAME/campus-stores/commit/COMMIT-SHA`.
-3. [Submit your work through the Google Form](https://docs.google.com/forms/d/e/1FAIpQLScvzoh1R4WS-SkiwAVBQbMvniieJYSoOEfLMyVo5CyjOvYUgQ/viewform). Your **roll number**, **email ID**, and **final commit link from your public fork** are required. Enter your roll number and email ID in the form only.
+## 🎨 Design System Specifications
+- **Typography**: Inter & JetBrains Mono with tight letter spacing and tabular numerals.
+- **Theme Support**: Seamless Dark (Obsidian Glass) and Light (Crisp Paper) mode toggling.
+- **Motion**: Powered by Matt Perry's Motion.dev spring transitions (`stiffness: 350, damping: 28`).
+- **Icons**: Pixel-perfect Lucide-compatible vector icons.
+- **Local Storage Persistence**: Full shift state persistence in browser storage (`campus-stores.shift.v1`).
